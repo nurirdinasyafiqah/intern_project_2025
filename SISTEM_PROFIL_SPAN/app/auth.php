@@ -21,14 +21,14 @@ function login($emel, $kata_laluan) {
 
 function require_login() {
     if (!isset($_SESSION['user'])) {
-        header("Location: /SISTEM_PROFIL_SPAN/public/login.php");
+        header("Location: /intern_project_2025/SISTEM_PROFIL_SPAN/public/login.php");
         exit();
     }
 }
 
 function logout() {
     session_destroy();
-    header("Location: /SISTEM_PROFIL_SPAN/public/login.php");
+    header("Location: /intern_project_2025/SISTEM_PROFIL_SPAN/public/login.php");
     exit();
 }
 ?>
