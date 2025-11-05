@@ -156,7 +156,7 @@ $peralatan = ['Office 365'];
   <a href="dashboard.php" class="nav-link active">
     <i class="bi bi-grid-1x2-fill"></i> Dashboard
   </a>
-  <a href="sistem_utama/list.php" class="nav-link">
+  <a href="sistem_utama/sistemUtama.php" class="nav-link">
     <i class="bi bi-pc-display"></i> Sistem Utama
   </a>
   <a href="peralatan/list.php" class="nav-link">
