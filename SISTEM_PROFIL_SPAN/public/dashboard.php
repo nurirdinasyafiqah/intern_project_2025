@@ -5,8 +5,8 @@ require_login();
 // contoh data dummy (nanti boleh ambil dari DB)
 $total_sistem = 29;
 $total_peralatan = 13;
-$sistem_utama = ['sisMAS'];
-$peralatan = ['Office 365'];
+$sistem_utama = ['cuba try system'];
+$peralatan = ['cuba try appliances'];
 ?>
 <!DOCTYPE html>
 <html lang="ms">
@@ -55,7 +55,7 @@ $peralatan = ['Office 365'];
       gap: 10px;
     }
     .sidebar .nav-link.active {
-      background-color: #0072bc;
+      background-color: #006EA0;
       color: #fff;
     }
     .sidebar .nav-link:hover {
