@@ -24,7 +24,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
       font-family: 'Poppins', sans-serif;
     }
 
-    /* SIDEBAR (UNCHANGED) */
+    /* SIDEBAR */
     .sidebar {
       background-color: #f8f9fa;
       width: 260px;
@@ -201,6 +201,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <button><i class="bi bi-eye-fill me-1"></i>View</button>
       </div>
     <?php endforeach; ?>
+
+    <?php if (isset($_GET['success'])): ?>
+      <div class="alert alert-success text-center">✅ Profil sistem berjaya disimpan!</div>
+    <?php endif; ?>
   </div>
 </div>
 
