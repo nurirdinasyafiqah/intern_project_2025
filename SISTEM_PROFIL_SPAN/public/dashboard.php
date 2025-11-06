@@ -5,14 +5,14 @@ require_login();
 // contoh data dummy (nanti boleh ambil dari DB)
 $total_sistem = 29;
 $total_peralatan = 13;
-$sistem_utama = ['cuba try system'];
-$peralatan = ['cuba try appliances'];
+$sistem_utama = ['list system'];
+$peralatan = ['list appliances'];
 ?>
 <!DOCTYPE html>
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard | Sistem Profil SPAN</title>
+  <title>Dashboard | Sistem Profil</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
@@ -159,7 +159,7 @@ $peralatan = ['cuba try appliances'];
   <a href="sistem_utama/sistemUtama.php" class="nav-link">
     <i class="bi bi-pc-display"></i> Sistem Utama
   </a>
-  <a href="peralatan/list.php" class="nav-link">
+  <a href="peralatan/peralatan.php" class="nav-link">
     <i class="bi bi-hdd-stack"></i> Peralatan
   </a>
 </div>

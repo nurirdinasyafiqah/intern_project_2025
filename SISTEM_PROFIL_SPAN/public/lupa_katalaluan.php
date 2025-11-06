@@ -1,28 +1,21 @@
 <?php
 require_once '../app/config.php';
+
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = trim($_POST['nama_penuh']);
     $emel = trim($_POST['emel']);
-    $kata_laluan = $_POST['kata_laluan'];
-    $peranan = 'staff'; // default role
 
-    // Hash password
-    $hashed = password_hash($kata_laluan, PASSWORD_DEFAULT);
+    // Semak jika emel wujud dalam DB
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE emel = ?");
+    $stmt->execute([$emel]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Semak kalau emel dah wujud
-    $check = $pdo->prepare("SELECT * FROM user WHERE emel = ?");
-    $check->execute([$emel]);
-    if ($check->fetch()) {
-        $message = '<div class="alert alert-warning text-center">⚠️ Emel sudah digunakan. Sila guna emel lain.</div>';
+    if ($user) {
+        // Untuk demo: papar mesej berjaya (belum implement reset sebenar)
+        $message = '<div class="alert alert-success text-center">Pautan reset kata laluan telah dihantar ke emel anda (simulasi).</div>';
     } else {
-        $stmt = $pdo->prepare("INSERT INTO user (nama_penuh, emel, kata_laluan, peranan) VALUES (?, ?, ?, ?)");
-        if ($stmt->execute([$nama, $emel, $hashed, $peranan])) {
-            $message = '<div class="alert alert-success text-center">✅ Akaun berjaya didaftarkan! Anda boleh log masuk sekarang.</div>';
-        } else {
-            $message = '<div class="alert alert-danger text-center">❌ Ralat semasa pendaftaran.</div>';
-        }
+        $message = '<div class="alert alert-danger text-center">Emel tidak dijumpai dalam sistem.</div>';
     }
 }
 ?>
@@ -30,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <title>Daftar Akaun | Sistem Profil SPAN</title>
+    <title>Lupa Kata Laluan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -42,20 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             flex-direction: column;
         }
-        .register-box {
+        .reset-box {
             background: rgba(255, 255, 255, 0.95);
             border: 2px solid #cce5f6;
             border-radius: 10px;
-            padding: 60px 50px;
-            max-width: 450px;
+            padding: 80px 50px;
+            max-width: 400px;
             width: 90%;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
-        .register-box h3 {
+        .reset-box h3 {
             text-align:center;
             color: #006fa6;
             font-weight: 700;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-decoration: underline;
             text-underline-offset: 4px;
         }
@@ -96,28 +89,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    
 
-
-<div class="register-box">
-    <h3>Daftar Akaun</h3>
+<div class="reset-box">
+    <h3>Lupa Kata Laluan</h3>
 
     <?= $message ?>
 
     <form method="POST">
-        <div class="mb-4">
-            <label class="form-label">Nama Penuh</label>
-            <input type="text" name="nama_penuh" class="form-control" required>
-        </div>
-        <div class="mb-4">
-            <label class="form-label">Emel</label>
-            <input type="email" name="emel" class="form-control" required>
-        </div>
         <div class="mb-5">
-            <label class="form-label">Kata Laluan</label>
-            <input type="password" name="kata_laluan" class="form-control" required>
+            <label for="emel" class="form-label">Masukkan Emel Anda</label>
+            <input type="email" class="form-control" id="emel" name="emel" required>
         </div>
         <div class="d-grid mb-4">
-            <button type="submit" class="btn btn-primary">Daftar Akaun</button>
+            <button type="submit" class="btn btn-primary">Hantar Pautan Reset</button>
         </div>
         <div class="extra-links">
             <a href="login.php">← Kembali ke Log Masuk</a>

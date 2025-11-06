@@ -4,7 +4,7 @@ require_login();
 
 // contoh data dummy
 $sistem_list = [
-  ['nama' => 'cuba try test']
+  ['nama' => 'list system']
 ];
 
 $current_page = basename($_SERVER['PHP_SELF']);
@@ -14,7 +14,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <title>Sistem Utama | Sistem Profil SPAN</title>
+  <title>Sistem Utama | Sistem Profil</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -175,7 +175,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <a href="sistemUtama.php" class="nav-link <?= ($current_page == 'sistemUtama.php') ? 'active' : '' ?>">
     <i class="bi bi-pc-display"></i> Sistem Utama
   </a>
-  <a href="../peralatan/list.php" class="nav-link <?= ($current_page == 'list.php') ? 'active' : '' ?>">
+  <a href="../peralatan/peralatan.php" class="nav-link <?= ($current_page == 'list.php') ? 'active' : '' ?>">
     <i class="bi bi-hdd-stack"></i> Peralatan
   </a>
 </div>
