@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/config.php';
 
 function login($emel, $kata_laluan) {
@@ -12,7 +15,8 @@ function login($emel, $kata_laluan) {
         $_SESSION['user'] = [
             'id' => $user['id_user'],
             'nama' => $user['nama_penuh'],
-            'peranan' => $user['peranan']
+            'emel' => $user['emel']
+            //'peranan' => $user['peranan']
         ];
         return true;
     }

@@ -3,97 +3,131 @@ require_once '../../app/config.php';
 require_once '../../app/auth.php';
 require_login();
 
-// Semak jika form disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     try {
-        // Simpan ke dalam jadual sistem_utama
+        // Ensure user session exists
+        $id_user = $_SESSION['user']['id'] ?? null;
+        
+        if (!$id_user) {
+            throw new Exception("ID pengguna tidak ditemui dalam sesi login.");
+        }
+
+        // 1️⃣ SISTEM_UTAMA
         $stmt = $pdo->prepare("
             INSERT INTO sistem_utama (
-                nama_entiti, tarikh_kemaskini, nama_bahagian, alamat_pejabat,
-                nama_ketua_bahagian_it, no_telefon, no_faks, emel_ketua_bahagian_it,
-                nama_cio, nama_ictso, carta_organisasi, nama_sistem, objektif_sistem,
-                pemilik_sistem, tarikh_mula, tarikh_siap, bil_pengguna, kaedah_inhouse,
-                kaedah_outsource, bil_modul_kategori, bahasa_pengaturcaraan, pangkalan_data,
-                integrasi, penyelenggaraan_sistem, kos_keseluruhan, kos_perkakasan, kos_perisian,
-                lesen_perisian, penyelenggaraan, kos_lain
+                id_user, nama_entiti, tarikh_kemaskini, bahagian, alamat,
+                nama_ketua, no_telefon, no_faks, emel_ketua, cio, ictso, carta_organisasi
             ) VALUES (
-                :nama_entiti, :tarikh_kemaskini, :nama_bahagian, :alamat_pejabat,
-                :nama_ketua_bahagian_it, :no_telefon, :no_faks, :emel_ketua_bahagian_it,
-                :nama_cio, :nama_ictso, :carta_organisasi, :nama_sistem, :objektif_sistem,
-                :pemilik_sistem, :tarikh_mula, :tarikh_siap, :bil_pengguna, :kaedah_inhouse,
-                :kaedah_outsource, :bil_modul_kategori, :bahasa_pengaturcaraan, :pangkalan_data,
-                :integrasi, :penyelenggaraan_sistem, :kos_keseluruhan, :kos_perkakasan, :kos_perisian,
-                :lesen_perisian, :penyelenggaraan, :kos_lain
+                :id_user, :nama_entiti, :tarikh_kemaskini, :bahagian, :alamat,
+                :nama_ketua, :no_telefon, :no_faks, :emel_ketua, :cio, :ictso, :carta_organisasi
             )
         ");
-
         $stmt->execute([
-            ':nama_entiti' => $_POST['nama_entiti'],
-            ':tarikh_kemaskini' => $_POST['tarikh_kemaskini'],
-            ':nama_bahagian' => $_POST['nama_bahagian'],
-            ':alamat_pejabat' => $_POST['alamat_pejabat'],
-            ':nama_ketua_bahagian_it' => $_POST['nama_ketua_bahagian_it'],
-            ':no_telefon' => $_POST['no_telefon'],
-            ':no_faks' => $_POST['no_faks'],
-            ':emel_ketua_bahagian_it' => $_POST['emel_ketua_bahagian_it'],
-            ':nama_cio' => $_POST['nama_cio'],
-            ':nama_ictso' => $_POST['nama_ictso'],
-            ':carta_organisasi' => $_POST['carta_organisasi'],
-            ':nama_sistem' => $_POST['nama_sistem'],
-            ':objektif_sistem' => $_POST['objektif_sistem'],
-            ':pemilik_sistem' => $_POST['pemilik_sistem'],
-            ':tarikh_mula' => $_POST['tarikh_mula'],
-            ':tarikh_siap' => $_POST['tarikh_siap'],
-            ':bil_pengguna' => $_POST['bil_pengguna'],
-            ':kaedah_inhouse' => $_POST['kaedah_inhouse'],
-            ':kaedah_outsource' => $_POST['kaedah_outsource'],
-            ':bil_modul_kategori' => $_POST['bil_modul_kategori'],
-            ':bahasa_pengaturcaraan' => $_POST['bahasa_pengaturcaraan'],
-            ':pangkalan_data' => $_POST['pangkalan_data'],
-            ':integrasi' => $_POST['integrasi'],
-            ':penyelenggaraan_sistem' => $_POST['penyelenggaraan_sistem'],
-            ':kos_keseluruhan' => $_POST['kos_keseluruhan'],
-            ':kos_perkakasan' => $_POST['kos_perkakasan'],
-            ':kos_perisian' => $_POST['kos_perisian'],
-            ':lesen_perisian' => $_POST['lesen_perisian'],
-            ':penyelenggaraan' => $_POST['penyelenggaraan'],
-            ':kos_lain' => $_POST['kos_lain']
+            ':id_user' => $id_user,
+            ':nama_entiti' => $_POST['nama_entiti'] ?? '',
+            ':tarikh_kemaskini' => $_POST['tarikh_kemaskini'] ?? null,
+            ':bahagian' => $_POST['bahagian'] ?? '',
+            ':alamat' => $_POST['alamat'] ?? '',
+            ':nama_ketua' => $_POST['nama_ketua'] ?? '',
+            ':no_telefon' => $_POST['no_telefon'] ?? '',
+            ':no_faks' => $_POST['no_faks'] ?? '',
+            ':emel_ketua' => $_POST['emel_ketua'] ?? '',
+            ':cio' => $_POST['cio'] ?? '',
+            ':ictso' => $_POST['ictso'] ?? '',
+            ':carta_organisasi' => $_POST['carta_organisasi'] ?? ''
         ]);
-
         $id_sistemutama = $pdo->lastInsertId();
 
-        // Simpan ke jadual akses_sistem
+        // 2️⃣ SISTEM_APLIKASI
         $stmt2 = $pdo->prepare("
-            INSERT INTO akses_sistem (id_sistemutama, kategori_dalaman, kategori_umum, pegawai_urus_akses)
-            VALUES (:id_sistemutama, :kategori_dalaman, :kategori_umum, :pegawai_urus_akses)
+            INSERT INTO sistem_aplikasi (
+                id_sistemutama, nama_sistem, objektif, pemilik, tarikh_mula, tarikh_siap,
+                tarikh_guna, bil_pengguna, kaedah_pembangunan, inhouse, outsource,
+                bil_modul, kategori, bahasa_pengaturcaraan, pangkalan_data, rangkaian, integrasi, penyelenggaraan
+            ) VALUES (
+                :id_sistemutama, :nama_sistem, :objektif, :pemilik, :tarikh_mula, :tarikh_siap,
+                :tarikh_guna, :bil_pengguna, :kaedah_pembangunan, :inhouse, :outsource,
+                :bil_modul, :kategori, :bahasa_pengaturcaraan, :pangkalan_data, :rangkaian, :integrasi, :penyelenggaraan
+            )
         ");
         $stmt2->execute([
             ':id_sistemutama' => $id_sistemutama,
-            ':kategori_dalaman' => !empty($_POST['kategori_dalaman']) ? 1 : 0,
-            ':kategori_umum' => !empty($_POST['kategori_umum']) ? 1 : 0,
-            ':pegawai_urus_akses' => $_POST['pegawai_urus_akses']
+            ':nama_sistem' => $_POST['nama_sistem'] ?? '',
+            ':objektif' => $_POST['objektif'] ?? '',
+            ':pemilik' => $_POST['pemilik'] ?? '',
+            ':tarikh_mula' => $_POST['tarikh_mula'] ?? null,
+            ':tarikh_siap' => $_POST['tarikh_siap'] ?? null,
+            ':tarikh_guna' => $_POST['tarikh_guna'] ?? null,
+            ':bil_pengguna' => $_POST['bil_pengguna'] ?? '',
+            ':kaedah_pembangunan' => $_POST['kaedah_pembangunan'] ?? '',
+            ':inhouse' => $_POST['inhouse'] ?? '',
+            ':outsource' => $_POST['outsource'] ?? '',
+            ':bil_modul' => $_POST['bil_modul'] ?? '',
+            ':kategori' => $_POST['kategori'] ?? '',
+            ':bahasa_pengaturcaraan' => $_POST['bahasa_pengaturcaraan'] ?? '',
+            ':pangkalan_data' => $_POST['pangkalan_data'] ?? '',
+            ':rangkaian' => $_POST['rangkaian'] ?? '',
+            ':integrasi' => $_POST['integrasi'] ?? '',
+            ':penyelenggaraan' => $_POST['penyelenggaraan'] ?? ''
         ]);
 
-        // Simpan ke jadual pegawai_rujukan
+        // 3️⃣ KOS_SISTEM
         $stmt3 = $pdo->prepare("
-            INSERT INTO pegawai_rujukan (id_sistemutama, nama_pegawai, jawatan_gred, bahagian, emel_pegawai, no_telefon)
-            VALUES (:id_sistemutama, :nama_pegawai, :jawatan_gred, :bahagian, :emel_pegawai, :no_telefon)
+            INSERT INTO kos_sistem (
+                id_sistemutama, keseluruhan, perkakasan, perisian,
+                lesen_perisian, penyelenggaraan, kos_lain
+            ) VALUES (
+                :id_sistemutama, :keseluruhan, :perkakasan, :perisian,
+                :lesen_perisian, :penyelenggaraan, :kos_lain
+            )
         ");
         $stmt3->execute([
             ':id_sistemutama' => $id_sistemutama,
-            ':nama_pegawai' => $_POST['nama_pegawai'],
-            ':jawatan_gred' => $_POST['jawatan_gred'],
-            ':bahagian' => $_POST['bahagian'],
-            ':emel_pegawai' => $_POST['emel_pegawai'],
-            ':no_telefon' => $_POST['no_telefon']
+            ':keseluruhan' => $_POST['keseluruhan'] ?? 0,
+            ':perkakasan' => $_POST['perkakasan'] ?? 0,
+            ':perisian' => $_POST['perisian'] ?? 0,
+            ':lesen_perisian' => $_POST['lesen_perisian'] ?? 0,
+            ':penyelenggaraan' => $_POST['penyelenggaraan_kos'] ?? 0,
+            ':kos_lain' => $_POST['kos_lain'] ?? 0
         ]);
 
-        // Redirect balik
+        // 4️⃣ AKSES_SISTEM
+        $stmt4 = $pdo->prepare("
+            INSERT INTO akses_sistem (
+                id_sistemutama, kategori_dalaman, kategori_umum, pegawai_urus_akses
+            ) VALUES (
+                :id_sistemutama, :kategori_dalaman, :kategori_umum, :pegawai_urus_akses
+            )
+        ");
+        $stmt4->execute([
+            ':id_sistemutama' => $id_sistemutama,
+            ':kategori_dalaman' => $_POST['kategori_dalaman'] ?? 0,
+            ':kategori_umum' => $_POST['kategori_umum'] ?? 0,
+            ':pegawai_urus_akses' => $_POST['pegawai_urus_akses'] ?? ''
+        ]);
+
+        // 5️⃣ PEGAWAI_RUJUKAN_SISTEM
+        $stmt5 = $pdo->prepare("
+            INSERT INTO pegawai_rujukan_sistem (
+                id_sistemutama, nama_pegawai, jawatan_gred, bahagian, emel_pegawai, no_telefon
+            ) VALUES (
+                :id_sistemutama, :nama_pegawai, :jawatan_gred, :bahagian, :emel_pegawai, :no_telefon
+            )
+        ");
+        $stmt5->execute([
+            ':id_sistemutama' => $id_sistemutama,
+            ':nama_pegawai' => $_POST['nama_pegawai'] ?? '',
+            ':jawatan_gred' => $_POST['jawatan_gred'] ?? '',
+            ':bahagian' => $_POST['bahagian_pegawai'] ?? '',
+            ':emel_pegawai' => $_POST['emel_pegawai'] ?? '',
+            ':no_telefon' => $_POST['no_telefon_pegawai'] ?? ''
+        ]);
+
         header("Location: sistemUtama.php?success=1");
         exit;
-    } catch (PDOException $e) {
-        die("Ralat semasa simpan: " . $e->getMessage());
+
+    } catch (Exception $e) {
+        die("❌ Ralat semasa simpan: " . $e->getMessage());
     }
 } else {
     header("Location: sistemUtama.php");
