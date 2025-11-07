@@ -6,7 +6,7 @@ require_login();
 $current_page = basename($_SERVER['PHP_SELF']);
 
 // ambil senarai sistem dari DB
-$stmt = $pdo->query("SELECT id_sistemutama, nama_entiti FROM sistem_utama ORDER BY id_sistemutama DESC");
+$stmt = $pdo->query("SELECT id_sistemutama, nama_sistem FROM sistem_aplikasi ORDER BY id_sistemutama DESC");
 $sistem_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -37,7 +37,18 @@ $sistem_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
       max-height: calc(100vh - 200px); /* allows scrolling inside modal */
       overflow-y: auto;
     }
-
+    .btn-view {
+      background-color: #006EA0;
+      color: #fff !important;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 16px;
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+    }
+    .btn-view:hover {
+      background-color: #005580;
+    }
   </style>
 </head>
 
@@ -87,8 +98,10 @@ $sistem_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php else: ?>
       <?php foreach ($sistem_list as $sistem): ?>
         <div class="profile-card">
-          <span><?= htmlspecialchars($sistem['nama_entiti']) ?></span>
-          <button><i class="bi bi-eye-fill me-1"></i>View</button>
+          <span><?= htmlspecialchars($sistem['nama_sistem']) ?></span>
+          <a href="view_sistem.php?id=<?= $sistem['id_sistemutama'] ?>" class="btn-view btn btn-sm">
+            <i class="bi bi-eye-fill me-1"></i>View
+          </a>
         </div>
       <?php endforeach; ?>
     <?php endif; ?>
