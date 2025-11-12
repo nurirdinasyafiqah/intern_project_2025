@@ -18,148 +18,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <style>
-    body {
-      background-color: #eaf4f9;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-      background-color: #f8f9fa;
-      width: 260px;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding-top: 30px;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    }
-    .sidebar .logo { text-align: center; margin-bottom: 15px; }
-    .sidebar .logo img { width: 150px; }
-    .sidebar .title {
-      text-align: center;
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 3px;
-      color: #1b2e46;
-      margin-bottom: 25px;
-    }
-    .sidebar .nav-link {
-      color: #1b2e46;
-      padding: 10px 20px;
-      border-radius: 8px;
-      margin: 5px 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .sidebar .nav-link.active { background-color: #006EA0; color: #fff; }
-    .sidebar .nav-link:hover { background-color: #d9edf7; color: #000; }
-
-    /* CONTENT */
-    .content {
-      margin-left: 260px;
-      padding: 20px 15px;
-    }
-    .main-header {
-      background-color: #ffffff;
-      color: #006EA0;
-      font-weight: 700;
-      font-size: 28px;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .main-header i { font-size: 28px; }
-    .main-body {
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      padding: 25px;
-      margin-top: 20px;
-    }
-    .search-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-    .search-bar {
-      border: 1px solid #bbb;
-      border-radius: 25px;
-      padding: 8px 15px;
-      width: 250px;
-      font-size: 14px;
-    }
-    .add-btn {
-      border: none;
-      background-color: #006EA0;
-      color: white;
-      font-size: 18px;
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s ease;
-    }
-    .profile-card {
-      background-color: #f4fbff;
-      border: 1px solid #d3e9f5;
-      border-radius: 10px;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .profile-card span { font-weight: 600; color: #004b73; }
-    .profile-card button {
-      background-color: #006EA0;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 18px;
-    }
-
-    /* MODAL */
-    .modal-header {
-      background: linear-gradient(90deg, #006EA0, #0096C7);
-    }
-    .modal-body {
-      background-color: #f8fbfc;
-      padding: 30px;
-      border-radius: 0 0 10px 10px;
-    }
-    .modal-body h6 {
-      color: #006EA0;
-      border-left: 5px solid #7ed957;
-      padding-left: 10px;
-      margin-top: 20px;
-      font-weight: 600;
-    }
-    .modal-body label {
-      font-weight: 500;
-      font-size: 14px;
-      color: #333;
-    }
-    .form-control {
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    .modal-dialog-scrollable .modal-body {
-      max-height: calc(100vh - 200px);
-      overflow-y: auto;
-    }
-  </style>
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/peralatan.css">
 </head>
 <body>
 
@@ -178,6 +38,15 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <a href="peralatan.php" class="nav-link active">
     <i class="bi bi-hdd-stack"></i> Peralatan
   </a>
+</div>
+
+<!-- HEADER -->
+<div class="content">
+<div class="header">
+  <h3><?= htmlspecialchars($_SESSION['user']['nama']) ?></h3>
+  <div class="profile-icon">
+    <i class="bi bi-person-fill"></i>
+  </div>
 </div>
 
 <!-- CONTENT -->

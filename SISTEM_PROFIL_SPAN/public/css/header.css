@@ -1,0 +1,28 @@
+    .content {
+      margin-left: 260px;
+      padding: 10px;
+    }
+    .header {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 12px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .header h3 {
+      margin: 0;
+      font-weight: 600;
+    }
+    .header .profile-icon {
+      background-color: #e9f1f8;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      color: #1b2e46;
+    }
