@@ -1,34 +1,238 @@
 /* SISTEM UTAMA */
 
-/* MAIN PAGE */
-    body { background-color:#eaf4f9; font-family:'Poppins',sans-serif; }
-    .sidebar { background-color:#f8f9fa; width:260px; height:100vh; position:fixed; top:0; left:0; padding-top:30px; box-shadow:2px 0 5px rgba(0,0,0,0.1);}
-    .sidebar .logo{text-align:center;margin-bottom:15px;}
-    .sidebar .logo img{width:150px;}
-    .sidebar .title{text-align:center;font-weight:600;font-size:13px;letter-spacing:3px;color:#1b2e46;margin-bottom:25px;}
-    .sidebar .nav-link{color:#1b2e46;padding:10px 20px;border-radius:8px;margin:5px 10px;display:flex;align-items:center;gap:10px;text-decoration:none;}
-    .sidebar .nav-link.active{background-color:#006EA0;color:#fff;}
-    .sidebar .nav-link:hover{background-color:#d9edf7;color:#000;}
-    .content{margin-left:260px;padding:20px 15px;}
-    .main-header{background-color:#fff;color:#006EA0;font-weight:700;font-size:28px;padding:20px;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;gap:10px;}
-    .main-body{background-color:#fff;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.05);padding:25px;margin-top:20px;}
-    .add-btn{border:none;background-color:#006EA0;color:#fff;font-size:18px;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;}
-    .profile-card{background-color:#f4fbff;border:1px solid #d3e9f5;border-radius:10px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-    .profile-card span{font-weight:600;color:#004b73;}
-    .profile-card button{background-color:#006EA0;color:#fff;border:none;border-radius:8px;padding:6px 18px;}
-    .modal-dialog-scrollable .modal-body {
-      max-height: calc(100vh - 200px); /* allows scrolling inside modal */
-      overflow-y: auto;
-    }
-    .btn-view {
-      background-color: #006EA0;
-      color: #fff !important;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 16px;
-      font-weight: 500;
-      transition: all 0.2s ease-in-out;
-    }
-    .btn-view:hover {
-      background-color: #005580;
-    }
+body {
+  background-color: #eaf4f9;
+  font-family: 'Poppins', sans-serif;
+  color: #1b2e46;
+}
+
+/* Sidebar */
+.sidebar {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9f3f9 100%);
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 30px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.sidebar .logo img {
+  width: 150px;
+  transition: transform 0.3s ease;
+}
+.sidebar .logo img:hover {
+  transform: scale(1.05);
+}
+.sidebar .title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #004b73;
+  margin-bottom: 30px;
+}
+.sidebar .nav-link {
+  color: #1b2e46;
+  padding: 10px 22px;
+  border-radius: 10px;
+  margin: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.sidebar .nav-link i {
+  font-size: 1.1rem;
+}
+.sidebar .nav-link.active {
+  background-color: #006EA0;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 110, 160, 0.3);
+}
+.sidebar .nav-link:hover {
+  background-color: #d9edf7;
+  color: #000;
+}
+
+/* Page Title */
+.main-header {
+  background: linear-gradient(90deg, #006EA0, #0096C7);
+  color: #fff;
+  font-weight: 700;
+  font-size: 26px;
+  padding: 18px 25px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Body */
+.main-body {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  padding: 18px 25px;
+  margin-top: 25px;
+  max-width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Add Button */
+.add-btn {
+  border: none;
+  background: linear-gradient(135deg, #0096C7, #006EA0);
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 150, 199, 0.3);
+}
+.add-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #007fb0, #005f8c);
+}
+
+/* Profile Cards */
+.profile-card {
+  background-color: #f4fbff;
+  border: 1px solid #d3e9f5;
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+.profile-card:hover {
+  background-color: #e8f6fc;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 110, 160, 0.15);
+}
+.profile-card span {
+  font-weight: 600;
+  color: #004b73;
+  font-size: 15px;
+}
+.btn-view {
+  background: linear-gradient(135deg, #0096C7, #006EA0);
+  color: #fff !important;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 110, 160, 0.3);
+}
+.btn-view:hover {
+  background: linear-gradient(135deg, #007fb0, #005f8c);
+  transform: translateY(-2px);
+}
+
+/* Modal */
+.modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.modal-header {
+  background: linear-gradient(90deg, #006EA0, #0096C7);
+  color: #fff;
+}
+.modal-footer .btn-success {
+  background: linear-gradient(135deg, #0096C7, #006EA0);
+  border: none;
+}
+.modal-footer .btn-success:hover {
+  background: linear-gradient(135deg, #007fb0, #005f8c);
+}
+
+/* Smooth fade for alerts */
+#successPopup {
+  animation: fadeInDown 0.4s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.add-btn.clicked {
+  transform: scale(1.15);
+  box-shadow: 0 0 15px rgba(0, 150, 199, 0.5);
+}
+
+/* Search Bar */
+.search-input {
+  width: 180px;
+  border-radius: 10px;
+  border: 1px solid #cce3ef;
+  padding: 8px 12px;
+  font-size: 14px;
+  box-shadow: 0 1px 4px rgba(0, 110, 160, 0.05);
+  transition: all 0.3s ease;
+}
+.search-input:focus {
+  border-color: #0096C7;
+  box-shadow: 0 0 6px rgba(0, 150, 199, 0.2);
+  outline: none;
+}
+
+/* FORM - TAMBAH PROFIL */
+.section-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 25px;
+}
+.section-title {
+  background: #e1f1fa;
+  color: #004b73;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-left: 5px solid #0096C7;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+label {
+  font-weight: 500;
+  color: #00334d;
+  font-size: 14px;
+}
+input.form-control, textarea.form-control, select.form-control {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+input.form-control:focus, textarea.form-control:focus, select.form-control:focus {
+  border-color: #0096C7;
+  box-shadow: 0 0 5px rgba(0,150,199,0.3);
+}
+.section-card .row > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+

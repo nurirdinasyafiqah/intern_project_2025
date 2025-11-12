@@ -48,7 +48,7 @@ $peralatan = ['list appliances'];
   </div>
 
   <!-- Sistem Utama -->
-  <div class="card-section mt-4" style="background-color: #f1f9f1;">
+  <div class="card-section mt-3" style="background-color: #f1f9f1;">
     <div class="row">
       <div class="col-md-4">
         <div class="stat-box">
