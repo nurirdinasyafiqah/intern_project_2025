@@ -32,11 +32,88 @@ if (!$data) {
 <head>
   <meta charset="UTF-8">
   <title>Lihat Profil Sistem | Sistem Profil</title>
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  
-  <link href="../css/sistemUtama.css" rel="stylesheet">
+  <style>
+    body {
+      background-color:#f5faff;
+      font-family:"Poppins",sans-serif;
+      padding:30px;
+    }
+    .container-box {
+      background-color:#fff;
+      border:2px solid #b9e0f5;
+      border-radius:10px;
+      padding:40px 50px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color:#006EA0;
+      font-weight:700;
+      text-align:center;
+      margin-bottom:40px;
+      text-decoration:underline;
+      text-underline-offset:6px;
+    }
+    h5 {
+      color:#004b73;
+      font-weight:600;
+      margin-top:40px;
+      margin-bottom:15px;
+      text-transform:uppercase;
+      border-bottom:2px solid #b9e0f5;
+      display:inline-block;
+      padding-bottom:4px;
+    }
+    .info-box {
+      background-color:#f0f9ff;
+      border:1px solid #cce9f9;
+      border-radius:6px;
+      padding:15px 20px;
+      margin-bottom:10px;
+    }
+    .info-label {
+      font-weight:600;
+      color:#003c5c;
+      width:40%;
+    }
+    .info-value {
+      color:#004b73;
+      flex:1;
+    }
+    .info-row {
+      display:flex;
+      justify-content:space-between;
+      padding:3px 0;
+      border-bottom:1px dotted #d0ebff;
+    }
+    .back-btn {
+      text-decoration:none;
+      color:#006EA0;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      margin-bottom:20px;
+    }
+    .back-btn:hover { text-decoration:underline; }
+    .edit-btn {
+      position: absolute;
+      right: 40px;
+      top: 40px;
+      background-color: #006EA0;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .edit-btn:hover {
+      background-color: #005b86;
+    }
+  </style>
 </head>
 
 <?php if (isset($_GET['updated'])): ?>
