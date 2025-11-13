@@ -1,61 +1,63 @@
 <?php
-require_once '../app/auth.php';
-$error = '';
+require_once '../app/config.php';
+session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emel = $_POST['emel'];
     $kata_laluan = $_POST['kata_laluan'];
 
-    if (login($emel, $kata_laluan)) {
-        header("Location: dashboard.php");
-        exit;
+    $sql = "SELECT * FROM USER WHERE emel = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $emel);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        if (password_verify($kata_laluan, $user['kata_laluan'])) {
+            $_SESSION['id_user'] = $user['id_user'];
+            $_SESSION['nama_penuh'] = $user['nama_penuh'];
+            $_SESSION['peranan'] = $user['peranan'];
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $error = "Kata laluan salah.";
+        }
     } else {
-        $error = "Emel atau kata laluan tidak sah.";
+        $error = "Pengguna tidak ditemui.";
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <title>Log Masuk | Sistem Profil SPAN</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-  <link rel="stylesheet" href="css/login.css">
+  <meta charset="UTF-8">
+  <title>Log Masuk - Sistem Profil SPAN</title>
+  <link rel="stylesheet" href="css/sb-admin-2.min.css">
 </head>
-<body>
-
-<div class="logo">
-    <img src="../assets/img/span-logo.png" alt="Logo SPAN">
+<body class="bg-gradient-primary">
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="text-center mb-4">Log Masuk</h3>
+          <?php if (!empty($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
+          <form method="POST">
+            <div class="form-group">
+              <label>Emel</label>
+              <input type="email" name="emel" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Kata Laluan</label>
+              <input type="password" name="kata_laluan" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Log Masuk</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="subtitle">S I S T E M &nbsp; P R O F I L</div>
-
-<div class="login-box">
-    <h3>Log Masuk</h3>
-
-    <?php if ($error): ?>
-        <div class="alert alert-danger py-2 text-center"><?= $error ?></div>
-    <?php endif; ?>
-
-    <form method="POST">
-        <div class="mb-3">
-            <label for="emel" class="form-label">Emel Pengguna</label>
-            <input type="email" class="form-control" id="emel" name="emel" required>
-        </div>
-        <div class="mb-5">
-            <label for="kata_laluan" class="form-label">Kata Laluan</label>
-            <input type="password" class="form-control" id="kata_laluan" name="kata_laluan" required>
-        </div>
-        <div class="d-grid mb-4">
-            <button type="submit" class="btn btn-primary">Log Masuk</button>
-        </div>
-        <div class="extra-links">
-            <a href="lupa_katalaluan.php">Lupa Kata Laluan?</a><br>
-            <a href="register.php">Belum ada akaun? Daftar sekarang</a>
-        </div>
-    </form>
-</div>
-
 </body>
 </html>

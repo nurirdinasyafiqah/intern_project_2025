@@ -1,14 +1,16 @@
 <?php
 // app/config.php
-$host = '127.0.0.1';
-$db   = 'sistem_profil_span';
-$user = 'root';
-$pass = ''; // default XAMPP password kosong
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Gagal sambung ke pangkalan data: " . $e->getMessage());
+$host = 'localhost';
+$user = 'root';        // default XAMPP username
+$pass = '';            // default XAMPP password is empty
+$dbname = 'sistem_profil_span';
+
+// Create connection
+$conn = new mysqli($host, $user, $pass, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
 }
 ?>
