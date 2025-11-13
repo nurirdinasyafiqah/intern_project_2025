@@ -6,7 +6,7 @@ body {
   color: #1b2e46;
 }
 
-/* Sidebar */
+/* SIDEBAR */
 .sidebar {
   background: linear-gradient(180deg, #f8f9fa 0%, #e9f3f9 100%);
   width: 260px;
@@ -234,5 +234,244 @@ input.form-control:focus, textarea.form-control:focus, select.form-control:focus
 
 textarea.form-control {
   resize: vertical;
+}
+
+/* =========================================
+   VIEW_SISTEM PAGE STYLING
+   Sistem Profil SPAN - Professional Theme
+   ========================================= */
+
+body {
+  background-color: #f5faff;
+  font-family: "Poppins", sans-serif;
+  padding: 30px;
+}
+
+/* Main container */
+.container-box {
+  background-color: #ffffff;
+  border: 2px solid #b9e0f5;
+  border-radius: 12px;
+  padding: 40px 50px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+/* Page title */
+h2 {
+  color: #006ea0;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* Section headings */
+h5 {
+  color: #004b73;
+  font-weight: 600;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #b9e0f5;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+/* Info box section */
+.info-box {
+  background-color: #f0f9ff;
+  border: 1px solid #cce9f9;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 10px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dotted #d0ebff;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #003c5c;
+  width: 38%;
+  min-width: 200px;
+}
+
+.info-value {
+  color: #004b73;
+  flex: 1;
+  word-break: break-word;
+}
+
+/* Back button */
+.back-btn {
+  text-decoration: none;
+  color: #006ea0;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+.back-btn:hover {
+  text-decoration: underline;
+  transform: translateX(-3px);
+}
+
+/* Edit button */
+.edit-btn {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  background-color: #006ea0;
+  border: none;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 110, 160, 0.3);
+  transition: all 0.25s ease;
+}
+.edit-btn:hover {
+  background-color: #005b86;
+  transform: scale(1.05);
+}
+
+/* =======================
+   MODAL: Edit Profil UI
+   ======================= */
+
+.modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.modal-header {
+  background: linear-gradient(90deg, #006ea0, #0096c7);
+  color: #ffffff;
+}
+
+.modal-body {
+  background-color: #f7fbfd;
+  padding: 25px;
+}
+
+.section-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 25px;
+}
+.section-title {
+  background: #e1f1fa;
+  color: #004b73;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-left: 5px solid #0096c7;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 500;
+  color: #00334d;
+  font-size: 14px;
+}
+
+input.form-control,
+textarea.form-control,
+select.form-control {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+  border-color: #0096c7;
+  box-shadow: 0 0 5px rgba(0, 150, 199, 0.3);
+}
+
+/* Scrollable modal */
+.modal-dialog-scrollable .modal-body {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+}
+
+/* Modal footer */
+.modal-footer {
+  background: #f1f7fa;
+}
+.modal-footer .btn-success {
+  background: linear-gradient(135deg, #0096c7, #006ea0);
+  border: none;
+}
+.modal-footer .btn-success:hover {
+  background: linear-gradient(135deg, #007fb0, #005f8c);
+}
+
+/* Scrollbar inside modal */
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: #b2dff5;
+  border-radius: 10px;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background-color: #88c8e8;
+}
+
+/* Animation for popup alert */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#successPopup {
+  animation: fadeInDown 0.4s ease;
+}
+
+/* VIEW SISTEM */
+
+body.view-sistem {
+  background-color: #f5faff;
+  font-family: "Poppins", sans-serif;
+  padding: 30px;
+}
+
+body.view-sistem .container-box {
+  background-color: #ffffff;
+  border: 2px solid #b9e0f5;
+  border-radius: 12px;
+  padding: 40px 50px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+body.view-sistem h2 {
+  color: #006ea0;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
 
